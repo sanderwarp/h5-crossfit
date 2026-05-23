@@ -1324,13 +1324,18 @@ async function loadAthxBoard(cat, levelFilter = null) {
       byAthlete[aid].rows.push(r);
     });
 
+    const isDuo = cat.startsWith('duo');
+
     // Compute best scores per athlete
     const athletes = Object.values(byAthlete).map(a => {
-      const bestStr = Math.max(...a.rows.map(r => r.strength_kg || 0));
+      const bestStrRow = a.rows.reduce((best, r) => (r.strength_kg||0) > (best.strength_kg||0) ? r : best, a.rows[0]);
+      const bestStr = bestStrRow.strength_kg || 0;
       const bestEnd = Math.max(...a.rows.map(r => r.endurance_m || 0));
       const metcons = a.rows.filter(r => r.metcon_time_sec).map(r => r.metcon_time_sec);
       const bestMet = metcons.length ? Math.min(...metcons) : null;
-      return { name: a.name, bestStr, bestEnd, bestMet, rows: a.rows };
+      // Partner = from the best strength row
+      const partner = isDuo ? (bestStrRow.partner_name || null) : null;
+      return { name: a.name, partner, bestStr, bestEnd, bestMet, rows: a.rows };
     });
 
     // Sort by strength PR descending for display
@@ -1352,10 +1357,13 @@ async function loadAthxBoard(cat, levelFilter = null) {
     el.innerHTML = `
       <div style="font-size:11px;color:var(--dim);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">Classement ATHX · ${levelFilter === "lite" ? "🔵 Lite" : levelFilter === "pro" ? "🔴 Pro" : "🟡 Standard"} · ${catLabel(cat)} · rang total (↓ = meilleur)</div>
       ${athletes.map((a, i) => `
-        <div class="lb-row${a.name === currentAthlete?.name ? ' me' : ''}">
+        <div class="lb-row${a.name === currentAthlete?.name || a.partner === currentAthlete?.name ? ' me' : ''}">
           <div class="lb-rank ${rankClass(i)}">${rankIcon(i)}</div>
           <div>
-            <div class="lb-name">${a.name}${a.name === currentAthlete?.name ? ' <span style="font-size:10px;color:var(--gold)">· moi</span>' : ''}</div>
+            <div class="lb-name">
+              ${isDuo && a.partner ? `${a.name} & ${a.partner}` : a.name}
+              ${a.name === currentAthlete?.name ? '<span style="font-size:10px;color:var(--gold);margin-left:4px">· moi</span>' : ''}
+            </div>
             <div style="font-size:11px;color:var(--dim)">Rang: ${a.totalRank} pts</div>
           </div>
           <div style="text-align:right">
