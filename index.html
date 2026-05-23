@@ -506,7 +506,7 @@ body {
 
   <nav class="app-nav">
     <button class="nav-btn active" onclick="showPage('dashboard')">🏠 Dashboard</button>
-    <button class="nav-btn" onclick="showPage('athx')">⚔️ ATHX</button>
+    <button class="nav-btn" onclick="showPage('athx')">⚔️ ATHX 2026</button>
     <button class="nav-btn" onclick="showPage('hyrox')">🔥 Hyrox</button>
     <button class="nav-btn" onclick="showPage('courses')">🏃 Courses</button>
     <button class="nav-btn" onclick="showPage('admin')">⚙️ Admin</button>
@@ -530,15 +530,32 @@ body {
   <!-- ATHX -->
   <div class="page" id="page-athx">
     <div class="section-header">
-      <div class="section-title">⚔️ <span class="accent">ATHX</span></div>
+      <div class="section-title">⚔️ <span class="accent">ATHX</span> <span style="font-size:14px;color:var(--dim);font-weight:600">2026</span></div>
       <button class="btn-encode" onclick="openModal('modalAthx')">+ Encoder</button>
     </div>
+    <div style="margin-bottom:6px;font-size:10px;color:var(--dim);letter-spacing:1.5px;text-transform:uppercase">— LITE —</div>
+    <div class="sub-tabs" id="athxSubTabsLite">
+      <button class="btn-sm" onclick="setAthxLevel('solo_h','lite','athxSubTabsLite')">Solo H</button>
+      <button class="btn-sm" onclick="setAthxLevel('solo_f','lite','athxSubTabsLite')">Solo F</button>
+      <button class="btn-sm" onclick="setAthxLevel('duo_hh','lite','athxSubTabsLite')">Duo H/H</button>
+      <button class="btn-sm" onclick="setAthxLevel('duo_ff','lite','athxSubTabsLite')">Duo F/F</button>
+      <button class="btn-sm" onclick="setAthxLevel('duo_mix','lite','athxSubTabsLite')">Duo Mixte</button>
+    </div>
+    <div style="margin:8px 0 6px;font-size:10px;color:var(--dim);letter-spacing:1.5px;text-transform:uppercase">— ATHX Standard —</div>
     <div class="sub-tabs" id="athxSubTabs">
-      <button class="btn-sm active" onclick="setAthxCat('solo_h','athxSubTabs')">Solo H</button>
-      <button class="btn-sm" onclick="setAthxCat('solo_f','athxSubTabs')">Solo F</button>
-      <button class="btn-sm" onclick="setAthxCat('duo_hh','athxSubTabs')">Duo H/H</button>
-      <button class="btn-sm" onclick="setAthxCat('duo_ff','athxSubTabs')">Duo F/F</button>
-      <button class="btn-sm" onclick="setAthxCat('duo_mix','athxSubTabs')">Duo Mixte</button>
+      <button class="btn-sm active" onclick="setAthxLevel('solo_h','athx','athxSubTabs')">Solo H</button>
+      <button class="btn-sm" onclick="setAthxLevel('solo_f','athx','athxSubTabs')">Solo F</button>
+      <button class="btn-sm" onclick="setAthxLevel('duo_hh','athx','athxSubTabs')">Duo H/H</button>
+      <button class="btn-sm" onclick="setAthxLevel('duo_ff','athx','athxSubTabs')">Duo F/F</button>
+      <button class="btn-sm" onclick="setAthxLevel('duo_mix','athx','athxSubTabs')">Duo Mixte</button>
+    </div>
+    <div style="margin:8px 0 6px;font-size:10px;color:var(--dim);letter-spacing:1.5px;text-transform:uppercase">— PRO —</div>
+    <div class="sub-tabs" id="athxSubTabsPro">
+      <button class="btn-sm" onclick="setAthxLevel('solo_h','pro','athxSubTabsPro')">Solo H</button>
+      <button class="btn-sm" onclick="setAthxLevel('solo_f','pro','athxSubTabsPro')">Solo F</button>
+      <button class="btn-sm" onclick="setAthxLevel('duo_hh','pro','athxSubTabsPro')">Duo H/H</button>
+      <button class="btn-sm" onclick="setAthxLevel('duo_ff','pro','athxSubTabsPro')">Duo F/F</button>
+      <button class="btn-sm" onclick="setAthxLevel('duo_mix','pro','athxSubTabsPro')">Duo Mixte</button>
     </div>
     <div id="athxBoard"><div class="loader">Chargement…</div></div>
   </div>
@@ -549,11 +566,21 @@ body {
       <div class="section-title">🔥 <span class="accent">Hyrox</span></div>
       <button class="btn-encode" onclick="openModal('modalHyrox')">+ Encoder</button>
     </div>
+    <div style="margin-bottom:6px;font-size:10px;color:var(--dim);letter-spacing:1.5px;text-transform:uppercase">— Singles —</div>
     <div class="sub-tabs" id="hyroxSubTabs">
       <button class="btn-sm active" onclick="setHyroxFilter('all','hyroxSubTabs')">Tous</button>
-      <button class="btn-sm" onclick="setHyroxFilter('open','hyroxSubTabs')">Open</button>
-      <button class="btn-sm" onclick="setHyroxFilter('pro','hyroxSubTabs')">Pro</button>
-      <button class="btn-sm" onclick="setHyroxFilter('elite','hyroxSubTabs')">Elite</button>
+      <button class="btn-sm" onclick="setHyroxFilter('open_men','hyroxSubTabs')">Open Men</button>
+      <button class="btn-sm" onclick="setHyroxFilter('open_women','hyroxSubTabs')">Open Women</button>
+      <button class="btn-sm" onclick="setHyroxFilter('pro_men','hyroxSubTabs')">Pro Men</button>
+      <button class="btn-sm" onclick="setHyroxFilter('pro_women','hyroxSubTabs')">Pro Women</button>
+    </div>
+    <div style="margin:8px 0 6px;font-size:10px;color:var(--dim);letter-spacing:1.5px;text-transform:uppercase">— Doubles —</div>
+    <div class="sub-tabs" id="hyroxSubTabsDoubles">
+      <button class="btn-sm" onclick="setHyroxFilter('open_doubles_men','hyroxSubTabsDoubles')">Open Men</button>
+      <button class="btn-sm" onclick="setHyroxFilter('open_doubles_women','hyroxSubTabsDoubles')">Open Women</button>
+      <button class="btn-sm" onclick="setHyroxFilter('open_doubles_mixed','hyroxSubTabsDoubles')">Open Mixed</button>
+      <button class="btn-sm" onclick="setHyroxFilter('pro_doubles_men','hyroxSubTabsDoubles')">Pro Men</button>
+      <button class="btn-sm" onclick="setHyroxFilter('pro_doubles_women','hyroxSubTabsDoubles')">Pro Women</button>
     </div>
     <div id="hyroxBoard"><div class="loader">Chargement…</div></div>
   </div>
@@ -642,8 +669,9 @@ body {
       <div class="field">
         <label>Niveau</label>
         <select id="athxLevel">
-          <option value="athx">ATHX</option>
-          <option value="light">Light</option>
+          <option value="lite">Lite</option>
+          <option value="athx">ATHX Standard</option>
+          <option value="pro">Pro</option>
         </select>
       </div>
     </div>
@@ -696,19 +724,22 @@ body {
       <div class="field">
         <label>Catégorie</label>
         <select id="hyroxCat">
-          <option value="open">Open</option>
-          <option value="pro">Pro</option>
-          <option value="elite">Elite</option>
+          <optgroup label="Singles">
+            <option value="open_men">Open Men</option>
+            <option value="open_women">Open Women</option>
+            <option value="pro_men">Pro Men</option>
+            <option value="pro_women">Pro Women</option>
+          </optgroup>
+          <optgroup label="Doubles">
+            <option value="open_doubles_men">Open Doubles Men</option>
+            <option value="open_doubles_women">Open Doubles Women</option>
+            <option value="open_doubles_mixed">Open Doubles Mixed</option>
+            <option value="pro_doubles_men">Pro Doubles Men</option>
+            <option value="pro_doubles_women">Pro Doubles Women</option>
+          </optgroup>
         </select>
       </div>
-      <div class="field">
-        <label>Format</label>
-        <select id="hyroxFormat">
-          <option value="solo">Solo</option>
-          <option value="double">Double</option>
-          <option value="relay">Relay</option>
-        </select>
-      </div>
+
     </div>
     <div class="field">
       <label>Temps total (hh:mm:ss)</label>
@@ -816,6 +847,7 @@ async function sbFetch(path, opts = {}) {
 // ══════════════════════════════════
 let currentAthlete = null;
 let athxCatCurrent = 'solo_h';
+let athxLevelCurrent = 'athx';
 let hyroxFilterCurrent = 'all';
 let courseTypeCurrent = '5K';
 
@@ -1007,7 +1039,7 @@ async function initApp() {
   });
   toggleAthxPartner();
   loadDashboard();
-  loadAthxBoard('solo_h');
+  loadAthxBoard('solo_h', 'athx');
   loadHyroxBoard('all');
   loadCourseBoard('5K');
 }
@@ -1041,7 +1073,7 @@ async function loadDashboard() {
         return `<div class="feed-item">
           <div class="feed-icon">⚔️</div>
           <div class="feed-content">
-            <div class="feed-title">ATHX · ${catLabel(r.category)} · ${r.level?.toUpperCase()}</div>
+            <div class="feed-title">ATHX · ${catLabel(r.category)} · ${r.level === 'lite' ? 'Lite' : r.level === 'pro' ? 'Pro' : 'Standard'}</div>
             <div class="feed-meta">${fmtDate(r.event_date)} · Str: ${r.strength_kg||'—'}kg · End: ${r.endurance_m||'—'}m · Met: ${r.metcon_time_sec ? secToTime(r.metcon_time_sec) : '—'}</div>
           </div>
         </div>`;
@@ -1090,8 +1122,28 @@ function updatePRCards(athxRows, hyroxRows, raceRows) {
 }
 
 function catLabel(cat) {
-  const m = { solo_h: 'Solo H', solo_f: 'Solo F', duo_hh: 'Duo H/H', duo_ff: 'Duo F/F', duo_mix: 'Duo Mixte' };
+  const m = {
+    solo_h: 'Solo H', solo_f: 'Solo F',
+    duo_hh: 'Duo H/H', duo_ff: 'Duo F/F', duo_mix: 'Duo Mixte'
+  };
   return m[cat] || cat;
+}
+
+function hyroxCatLabel(cat) {
+  const m = {
+    open_men: 'Open Men', open_women: 'Open Women',
+    pro_men: 'Pro Men', pro_women: 'Pro Women',
+    open_doubles_men: 'Open Doubles Men', open_doubles_women: 'Open Doubles Women',
+    open_doubles_mixed: 'Open Doubles Mixed',
+    pro_doubles_men: 'Pro Doubles Men', pro_doubles_women: 'Pro Doubles Women'
+  };
+  return m[cat] || cat;
+}
+
+function hyroxBadgeClass(cat) {
+  if (cat?.startsWith('pro')) return 'pro';
+  if (cat?.startsWith('open')) return 'open';
+  return 'light';
 }
 
 // ══════════════════════════════════
@@ -1103,18 +1155,26 @@ function toggleAthxPartner() {
   document.getElementById('athxPartnerField').style.display = isDuo ? 'block' : 'none';
 }
 
-function setAthxCat(cat, tabsId) {
+function setAthxLevel(cat, level, tabsId) {
   athxCatCurrent = cat;
-  setSubTab(tabsId, cat);
-  loadAthxBoard(cat);
+  athxLevelCurrent = level;
+  // Deactivate all athx tab buttons
+  document.querySelectorAll('#athxSubTabsLite .btn-sm, #athxSubTabs .btn-sm, #athxSubTabsPro .btn-sm').forEach(b => b.classList.remove('active'));
+  // Activate clicked one
+  document.querySelectorAll(`#${tabsId} .btn-sm`).forEach(b => {
+    if (b.getAttribute('onclick')?.includes(`'${cat}'`) && b.getAttribute('onclick')?.includes(`'${level}'`)) b.classList.add('active');
+  });
+  loadAthxBoard(cat, level);
 }
 
-async function loadAthxBoard(cat) {
+async function loadAthxBoard(cat, levelFilter = null) {
   const el = document.getElementById('athxBoard');
   el.innerHTML = '<div class="loader">Chargement…</div>';
   try {
     // Get best per athlete for this cat
-    const rows = await sbFetch(`h5_athx_results?category=eq.${cat}&order=event_date.desc&select=*,h5_athletes(name,gender)`);
+    let athxPath = `h5_athx_results?category=eq.${cat}&order=event_date.desc&select=*,h5_athletes(name,gender)`;
+    if (levelFilter) athxPath += `&level=eq.${levelFilter}`;
+    const rows = await sbFetch(athxPath);
     if (!rows.length) { el.innerHTML = emptyState('Aucun résultat', 'Sois le premier à encoder !'); return; }
 
     // Group by athlete, keep best per score type
@@ -1151,7 +1211,7 @@ async function loadAthxBoard(cat) {
     athletes.sort((a,b) => a.totalRank - b.totalRank);
 
     el.innerHTML = `
-      <div style="font-size:11px;color:var(--dim);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">Classement ATHX · ${catLabel(cat)} · rang total (↓ = meilleur)</div>
+      <div style="font-size:11px;color:var(--dim);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">Classement ATHX · ${levelFilter === "lite" ? "🔵 Lite" : levelFilter === "pro" ? "🔴 Pro" : "🟡 Standard"} · ${catLabel(cat)} · rang total (↓ = meilleur)</div>
       ${athletes.map((a, i) => `
         <div class="lb-row${a.name === currentAthlete?.name ? ' me' : ''}">
           <div class="lb-rank ${rankClass(i)}">${rankIcon(i)}</div>
@@ -1214,6 +1274,10 @@ function setHyroxFilter(filter, tabsId) {
 async function loadHyroxBoard(filter) {
   const el = document.getElementById('hyroxBoard');
   el.innerHTML = '<div class="loader">Chargement…</div>';
+  // Deactivate all hyrox tab buttons, activate the right one
+  document.querySelectorAll('#hyroxSubTabs .btn-sm, #hyroxSubTabsDoubles .btn-sm').forEach(b => {
+    b.classList.toggle('active', b.getAttribute('onclick')?.includes(`'${filter}'`));
+  });
   try {
     let path = `h5_hyrox_results?order=total_time_sec.asc&select=*,h5_athletes(name)`;
     if (filter !== 'all') path += `&category=eq.${filter}`;
@@ -1243,8 +1307,7 @@ async function loadHyroxBoard(filter) {
         <div style="text-align:right">
           <div class="lb-score">${secToTime(r.total_time_sec, true)}</div>
           <div style="display:flex;gap:4px;justify-content:flex-end;margin-top:3px">
-            <span class="lb-badge ${r.category}">${r.category?.toUpperCase()}</span>
-            <span class="lb-badge" style="background:rgba(74,74,74,0.4);color:var(--dim)">${r.format}</span>
+            <span class="lb-badge ${hyroxBadgeClass(r.category)}">${hyroxCatLabel(r.category)}</span>
           </div>
         </div>
       </div>
@@ -1257,7 +1320,7 @@ async function saveHyrox() {
   const date = document.getElementById('hyroxDate').value;
   const event_name = document.getElementById('hyroxEvent').value.trim();
   const category = document.getElementById('hyroxCat').value;
-  const format = document.getElementById('hyroxFormat').value;
+  const format = category.includes('doubles') ? 'double' : 'solo';
   const timeStr = document.getElementById('hyroxTime').value;
   const totalTime = timeToSec(timeStr);
   const location = document.getElementById('hyroxLocation').value.trim();
