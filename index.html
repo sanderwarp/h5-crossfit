@@ -4,6 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>H5 CrossFit — Performance Tracker</title>
+<link rel="apple-touch-icon" href="logo_H5PO2.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="H5 CrossFit">
+<meta name="theme-color" content="#0D1117">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -1036,7 +1041,7 @@ async function hashStr(str) {
 
 function loginSuccess(athlete) {
   currentAthlete = athlete;
-  sessionStorage.setItem('h5athlete', JSON.stringify(athlete));
+  localStorage.setItem('h5athlete', JSON.stringify(athlete));
   document.getElementById('splash').style.display = 'none';
   document.getElementById('app').style.display = 'flex';
   document.getElementById('app').style.flexDirection = 'column';
@@ -1048,13 +1053,13 @@ function loginSuccess(athlete) {
 
 function doLogout() {
   if (!confirm('Se déconnecter ?')) return;
-  sessionStorage.removeItem('h5athlete');
+  localStorage.removeItem('h5athlete');
   location.reload();
 }
 
 // Check session on load
 window.addEventListener('load', () => {
-  const stored = sessionStorage.getItem('h5athlete');
+  const stored = localStorage.getItem('h5athlete');
   if (stored) {
     try { loginSuccess(JSON.parse(stored)); return; } catch(e) {}
   }
